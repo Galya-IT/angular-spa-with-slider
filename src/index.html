@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html lang="bg">
+    <head>
+        <meta charset="utf-8" />
+        <base href="/AngularExample/">
+
+        <title>Уеб сайт за Неизвестна организация</title>
+        <meta name="description" content="Уеб сайт за Неизвестна организация"/>
+        <meta name="author" content="Galya Bogdanova" />
+        
+        <link rel="shortcut icon" href="favicon.ico?v=3" />
+        
+        <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+        
+        <link href="assets/css/resetter.css" rel="stylesheet" />
+        <link href="assets/css/general.css" rel="stylesheet" />
+<!--        
+        <script src="assets/libs/angular-1.4.0-beta.3/angular.min.js" type="text/javascript"></script>-->
+        <script src="assets/libs/angular-1.4.0-beta.3/angular.js" type="text/javascript"></script>
+        
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <body data-ng-app="CompanyUnknown" data-ng-cloak>
+        
+        <header id="main-header">
+            <nav id="top-nav-line" data-ng-controller="TopNavLineController">
+                <section id="top-nav-line-left">
+                    <a href="index.html" id="logo-sda-icon">
+                        <img src="./assets/img/logo_sda_icon.png" title="Начало" />
+                    </a>
+                    <hgroup>
+                        <h1>Неизвестна организация</h1>
+                        <h2>София, бул. "Цариградско шосе"</h2>
+                    </hgroup>
+                </section>
+                <ul class="noselect">
+                    <li data-ng-repeat="link in links">
+                        <a href="{{link.url}}" target="_blank">
+                            <img data-ng-style="{'background-color': '#{{ link.backgroundColor}}'}" data-ng-src="{{link.backgroundSrc}}" title="{{link.name}}" />
+                            <span>{{link.name}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <nav id="top-nav-main" class="noselect">
+                <ul id="top-menu" data-ng-controller="TopMenuController">
+                    <li data-ng-repeat="menuItemInfo in menuItemInfos" data-ng-click="redirect(menuItemInfo.href)">
+                        <span class="top-menu-title">{{menuItemInfo.title}}</span>
+                        <span class="top-menu-subtitle">{{menuItemInfo.subtitle}}</span>
+                    </li>
+                </ul>
+            </nav>
+
+            <section id="slider" data-ng-controller="ImageSliderController">
+                <ul>
+                    <li class="slide"
+                        id="slide-{{$index}}"
+                        data-ng-repeat="slideInfo in slideInfos"
+                        data-ng-style="{'background-image': 'url({{ slideInfo.imageSrc}})'}"
+                        data-ng-class="slideInfo.isLinkAvailable && 'clickable'"
+                        data-ng-click="slideInfo.isLinkAvailable && openLink(slideInfo.href, slideInfo.isLinkInNewTab)">
+                        
+                        <section data-ng-if="slideInfo.showSlideText" class="slide-text">
+                            <h3>{{slideInfo.title}}</h3>
+                            <span>{{slideInfo.text}}</span>
+<!--                            <a data-ng-if="slideInfo.isLinkAvailable" href="{{slideInfo.href}}">Повече...</a>-->
+                        </section>
+                    </li>
+                </ul>
+                
+                <!-- Controls -->
+                <div id="arrow-left" class="noselect" data-ng-click="changeSlideToPrevious()">
+                    <
+                </div>
+                <div id="slider-checkboxes" class="noselect">
+                    <span data-ng-repeat="slideInfo in slideInfos" title="{{slideInfo.title}}" data-ng-click="changeSlideTo($index)" id="slide-checkbox-{{$index}}">{{$index}}</span>
+                </div>
+                <div id="arrow-right" class="noselect" data-ng-click="changeSlideToNext()">
+                    >
+                </div>
+            </section>
+        </header>
+
+        <aside id="aside-left">
+            <section id="next-event-widget">
+                <header>
+                    <h3>До следващото събитие остават:</h3>
+                </header>
+                
+                <div id="countdown-timer">
+                    <div id="clock-heading">
+                        <span>Дни</span>  : <span>Часове</span> : <span>Минути</span> : <span>Секунди</span>
+                    </div>
+                    <div id="clock-body">
+                        <span id="days"></span> : <span id="hours"></span> : <span id="minutes"></span> : <span id="seconds"></span>
+                    </div>
+                </div>
+                
+                <!-- http://gdrive-2.apphb.com/Content/loading.gif-->
+                <div id="countdown-timer-loading"><img src="assets/img/loader.gif"></div>
+                
+                <div id="countdown-timer-closed"></div>
+                
+                <img id="next-event-close" src="https://www.drupal.org/files/close_1.png" />
+            </section>
+            
+            <div id="next-event-widget-open">Колко време остава до следващото събитие?</div>
+            
+            sdgsdgsgsdhsd
+        </aside>
+
+        <section id="main-section" data-ng-view></section>
+        
+        <aside id="aside-right">
+            dgdg
+        </aside>
+        
+        <footer id="main-footer">
+            <div class="triangle"></div>
+            2015 &copy;
+        </footer>
+        
+        <script src="assets/libs/jquery-1.11.2.min.js"></script>
+        <script src="assets/libs/jquery-ui-1.11.2/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="assets/libs/moment.min.js" type="text/javascript"></script>
+        <script src="assets/libs/q.js" type="text/javascript"></script>
+        
+        <script src="assets/libs/angular-1.4.0-beta.3/angular-route.min.js" type="text/javascript"></script>
+        
+        <script src="angular/app.module.js"></script>
+        <script src="angular/app.route.js"></script>
+        <script src="angular/main/controllers/image-slider-controller.js"></script>
+        <script src="angular/main/controllers/top-menu-controller.js"></script>
+        <script src="angular/main/controllers/top-nav-line-controller.js" type="text/javascript"></script>
+        <script src="angular/main/controllers/news-controller.js" type="text/javascript"></script>
+        <!--        <script src="angular/main/directives/bgr-src-directive.js" type="text/javascript"></script>-->
+        
+        <script src="assets/js/next-event-widget.js"></script>
+        
+        <script>
+            $(document).on('ready', function() {
+                NextEventWidget.displayTime();
+
+                $('#next-event-close').click(function() {
+                    $('#next-event-widget').fadeOut(function() {
+                        $('#next-event-widget-open').fadeIn();
+                    });
+                });
+                
+                $('#next-event-widget-open').click(function() {
+                    $('#next-event-widget-open').css('display', 'none');
+                    $('#next-event-widget').fadeIn();
+                });
+            
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,19 @@
+<section id="news" data-ng-controller="NewsController">
+    <article data-ng-repeat="article in articles">
+        <figure class="featured-image-container">
+            <img data-ng-src="{{article.featuredImageUrl}}" />
+        </figure>
+        <header>
+            <h4 class="news-article-heading">{{article.title}}</h4>
+            <h5 class="news-article-sub-heading">{{article.subtitle}}</h5>
+            <span class="news-article-author">{{article.author}}</span>
+            <span class="news-article-date-added">{{article.dateAdded}}</span>
+        </header>
+        <section class="news-article-resume">
+            {{article.resume}}
+        </section>
+        <footer data-ng-if="article.isFullArticleAvailable">
+            <a href="{{article.fullArticleLink}}"></a>
+        </footer>
+    </article>
+</section>
